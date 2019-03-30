@@ -1,5 +1,5 @@
 <p align="center">
-    <h1 align="center">Git</h1>
+    <h1 align="center">Sample</h1>
 </p1>
 
 <p align="center"><i>sample project of Scripty.</i></p>
