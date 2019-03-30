@@ -10,7 +10,7 @@
 
 ## Installation via Swift Package Manager
 ```swift
-.package(url: "https://github.com/atsushi130/Scripty", from: "1.0.0"),
+.package(url: "https://github.com/atsushi130/Scripty", from: "1.0.1"),
 ```
 
 ## License
