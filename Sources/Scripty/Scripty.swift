@@ -1,20 +1,38 @@
 
 import Foundation
 
-public struct Script {
+public struct Scripty {
     
-    fileprivate let script: String
+    fileprivate let script: String?
     
-    public init(_ script: String) {
+    public static var builder: Scripty {
+        return Scripty()
+    }
+    
+    public init(_ script: String? = nil) {
         self.script = script
     }
     
-    public func exec() {
-        Process.launchedProcess(launchPath: "/bin/sh", arguments: ["-c", self.script]).waitUntilExit()
+    public func makeProcess() -> Process? {
+        guard let script = self.script else { return nil }
+        return Process.make(script: script)
+    }
+    
+    @discardableResult
+    public func exec() -> Process? {
+        let process = self.makeProcess()
+        process?.launchWithWaitUntilExit()
+        return process
     }
 }
 
-infix operator |
-public func | (lhs: Script, rhs: String) -> Script {
-    return Script(lhs.script + "|" + rhs)
+// MARK: pipe operator
+public extension Scripty {
+    public static func | (lhs: Scripty, rhs: String) -> Scripty {
+        if let script = lhs.script {
+            return Scripty(script + "|" + rhs)
+        } else {
+            return Scripty(rhs)
+        }
+    }
 }
