@@ -28,7 +28,7 @@ public struct Scripty {
 
 // MARK: pipe operator
 public extension Scripty {
-    public static func | (lhs: Scripty, rhs: String) -> Scripty {
+    static func | (lhs: Scripty, rhs: String) -> Scripty {
         if let script = lhs.script {
             return Scripty(script + "|" + rhs)
         } else {
